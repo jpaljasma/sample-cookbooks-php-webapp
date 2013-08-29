@@ -1,21 +1,32 @@
 <?php
 
 require_once 'inc/common.php';
+defined('WEB_ROOT') ||
+	define('WEB_ROOT', dirname(__FILE__).'/');
 
 // run phpinfo
-ob_start();phpinfo();$contents = ob_get_clean();
+// ob_start();phpinfo();$contents = ob_get_clean();
 
-// emulate slow, cpu-intensive loop
+// emulate slow, cpu-intensive loop (useful to test OpsWorks load based instances when running ApacheBench)
 for($j=0;$j<10000;$j++) { $v = ''; for($i=0;$i<20;$i++) { $v=base64_encode($v.$i.''); }}
 
-?><!DOCTYPE html>
-<html>
-	<head>
-		<title></title>
-	</head>
-	<body>
-		<h1 id="testing">Load Balancer Testing</h1>
-		<h2>Server address: <?php echo $_SERVER['SERVER_ADDR']; ?></h2>
-		<p><img width="400" height="175" alt="Testing loading the image from the server" src="images/img000.jpeg?r=<?php echo mt_rand(0,999999);?>" /></p>
-	</body>
-</html>
+
+$content = new stdClass();
+$content->title = 'OpsWorks Load Balancer Testing';
+$content->h1 = 'Server address:'.$_SERVER['SERVER_ADDR'];
+$content->body = '';
+
+/* Render the output using theme */
+if(file_exists('theme.php')) {
+	include_once('theme.php');
+	if(defined('APP_THEME')) {
+		$themeFolder = dirname(__FILE__).'/themes/'.APP_THEME.'/';
+		$themeFile = $themeFolder.'index.php';
+		if(file_exists($themeFile)) {
+			include($themeFile);
+		}
+	}
+}
+else {
+	var_dump($content);
+}
