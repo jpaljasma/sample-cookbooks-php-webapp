@@ -15,7 +15,7 @@ $_timer = microtime(true);
 $ret = array();
 if(function_exists('geoip_record_by_name')) {
     try {
-        $ret['ip'] = $ip = IPR::getIP();
+        $ip = IPR::getIP();
         $err = false;
         $loc = @geoip_record_by_name($ip);
         if($loc) {
@@ -25,6 +25,7 @@ if(function_exists('geoip_record_by_name')) {
             $loc = new stdClass();
             $err = 'Location unknown';
         }
+        $loc->ip = $ip;
         $loc->hostname = @gethostbyaddr($ip);
         $loc->hostname = $loc->hostname ?: $ip;
         	if( preg_match('/\./', $loc->hostname) ) $loc->domain = substr($loc->hostname, strpos($loc->hostname, '.', substr_count($loc->hostname, '.'))+1);
