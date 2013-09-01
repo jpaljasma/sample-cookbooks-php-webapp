@@ -15,7 +15,7 @@ $_timer = microtime(true);
 $ret = array();
 if(function_exists('geoip_record_by_name')) {
     try {
-        $ip = IPR::getIP();
+        $ret['ip'] = $ip = IPR::getIP();
         $err = false;
         $loc = @geoip_record_by_name($ip);
         if($loc) {
