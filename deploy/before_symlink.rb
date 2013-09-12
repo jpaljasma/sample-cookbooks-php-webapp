@@ -1,15 +1,11 @@
 current_release = release_path
 Chef::Log.info("running deploy/before_symlink.rb in folder #{current_release}")
-Chef::Log.debug(deploy)
-Chef::Log.debug(node)
+#Chef::Log.debug(deploy)
+#Chef::Log.debug(node)
 
 #create themes directory 
 directory "#{current_release}/themes" do
-  if platform?("ubuntu")
-    owner "www-data"
-  elsif platform?("amazon")   
-    owner "apache"
-  end
+  owner "apache"
   group deploy[:group]
   mode 0775
   action :create
