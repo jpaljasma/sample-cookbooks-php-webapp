@@ -3,6 +3,11 @@ Chef::Log.info("running deploy/before_symlink.rb in folder #{current_release}")
 #Chef::Log.debug(deploy)
 #Chef::Log.debug(node)
 
+run "echo 'release_path: #{release_path}' >> #{shared_path}/logs.log"
+run "echo 'current_path: #{current_path}' >> #{shared_path}/logs.log"
+run "echo 'shared_path: #{shared_path}' >> #{shared_path}/logs.log"
+run "echo 'node: #{node}' >> #{shared_path}/logs.log"
+
 #create themes directory 
 directory "#{current_release}/themes" do
   owner "apache"
