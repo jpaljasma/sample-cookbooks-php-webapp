@@ -27,7 +27,7 @@ accesses.each do |htaccess|
     owner "apache"
   
     variables(
-      :env =>    (node[:appserver][:env] rescue 'production')
+      :env =>    (node[:appserver][:env] rescue 'development')
     )
   end
 end
