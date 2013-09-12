@@ -17,16 +17,16 @@ directory "#{current_release}/themes" do
 end
   
 # create production .htaccess file
-#template "#{current_release}/.htaccess" do
-#  source "htaccess.erb"
-#  mode 0644
-#  group "deploy"
-#  owner "apache"
+template "#{current_release}/.htaccess" do
+  source "htaccess.erb"
+  mode 0644
+  group "deploy"
+  owner "apache"
 
-#  variables(
-#    :env =>    (node[:metasearch][:env] rescue nil)
-#  )
-#end
+  variables(
+    :env =>    (node[:appserver][:env] rescue nil)
+  )
+end
 
 # run composer installer without dev dependencies
 #script "install_composer" do
