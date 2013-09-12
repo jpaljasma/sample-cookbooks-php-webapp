@@ -1,3 +1,5 @@
+include_recipe "appserver"
+
 current_release = release_path
 Chef::Log.info("running deploy/before_symlink.rb in folder #{current_release}")
 Chef::Log.debug("#{node[:deploy]}")
