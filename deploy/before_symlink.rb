@@ -1,4 +1,5 @@
-include_recipe "appserver::default"
+# cannot include recipe directly, must use run_context.send
+run_context.send :include_recipe, 'appserver::default'
 
 current_release = release_path
 Chef::Log.info("running deploy/before_symlink.rb in folder #{current_release}")
