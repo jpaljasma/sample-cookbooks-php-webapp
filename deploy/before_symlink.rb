@@ -8,12 +8,12 @@ Chef::Log.debug("#{node}")
 #run "echo 'node: #{node}' >> #{shared_path}/logs.log"
 
 #create themes directory 
-#directory "#{current_release}/themes" do
-#  owner "apache"
-#  group "deploy"
-#  mode 0775
-#  action :create
-#end
+directory "#{current_release}/themes" do
+  owner "apache"
+  group "deploy"
+  mode 0775
+  action :create
+end
   
 # create production .htaccess file
 #template "#{current_release}/.htaccess" do
