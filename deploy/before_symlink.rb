@@ -28,21 +28,6 @@ template "#{current_release}/.htaccess" do
   )
 end
 
-# create proper folders if not exist
-directory "#{current_release}/core/cache" do
-  group deploy[:group]
-  owner "apache"
-  mode 00755
-  action :create
-end
-
-directory "#{current_release}/core/cache/zend" do
-  group deploy[:group]
-  owner "apache"
-  mode 00755
-  action :create
-end
-
 # run composer installer without dev dependencies
 script "install_composer" do
   interpreter "bash"
