@@ -1,7 +1,6 @@
 current_release = release_path
 Chef::Log.info("running deploy/before_symlink.rb in folder #{current_release}")
-#Chef::Log.debug("#{node}")
-#Chef::Log.debug(node)
+Chef::Log.debug("#{node}")
 
 #run "echo 'release_path: #{release_path}' >> #{shared_path}/logs.log"
 #run "echo 'current_path: #{current_path}' >> #{shared_path}/logs.log"
