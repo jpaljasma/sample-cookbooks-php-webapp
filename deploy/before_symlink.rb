@@ -10,23 +10,16 @@ directory "#{current_release}/themes" do
   action :create
 end
 
-accesses = [
-  "#{current_release}/.htaccess",
-  "#{current_release}/htaccess.txt"
-]
+# create production .htaccess file
+template "#{current_release}/.htaccess" do
+  source "htaccess.erb"
+  mode 0644
+  group "deploy"
+  owner "apache"
 
-accesses.each do |htaccess|
-  # create production .htaccess file
-  template htaccess do
-    source "htaccess.erb"
-    mode 0644
-    group "deploy"
-    owner "apache"
-  
-    variables(
-      :env =>    (node[:appserver][:env] rescue 'development')
-    )
-  end
+  variables(
+    :env =>    (node[:appserver][:env] rescue 'production')
+  )
 end
 
 # run composer installer without dev dependencies
